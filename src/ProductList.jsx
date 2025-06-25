@@ -249,6 +249,7 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(true); // Set showCart to true when cart icon is clicked
     };
+
     const handlePlantsClick = (e) => {
         e.preventDefault();
         setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
@@ -270,6 +271,10 @@ function ProductList({ onHomeClick }) {
             ...prevState,
             [product.name]: true,
         }));
+    };
+
+    const calculateTotalQuantity = () => {
+        return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
     };
 
     return (
@@ -308,7 +313,18 @@ function ProductList({ onHomeClick }) {
                                         <div className="product-title">{plant.name}</div>
                                         <div className="product-description">{plant.description}</div>
                                         <div className="product-cost">{plant.cost}</div>
-                                        <button className="product-button" onClick={()=> handleAddToCart(plant)}>Add to Cart</button>
+
+                                        <button 
+                                            className="product-button" 
+                                            onClick={()=> handleAddToCart(plant)}
+                                            style={{
+                                                backgroundColor: addedToCart[plant.name] ? 'grey' : '#4CAF50' ,
+                                                cursor: addedToCart[plant.name] ? 'not-allowed' : 'pointer',
+                                            }}
+                                            disabled={!!addedToCart[plant.name]}
+                                        >
+                                            {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
+                                        </button>
                                     </div>
                                 ))}
                             </div>
