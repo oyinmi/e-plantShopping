@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity, clearCart } from './CartSlice';
-import { useNavigate } from 'react-router-dom';
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
@@ -12,7 +11,7 @@ const CartItem = ({ onContinueShopping }) => {
   const handleContinueShopping = (e) => {
     e.preventDefault();
     if (onContinueShopping) {
-      onContinueShopping();
+      setShowCart(false);
     }
   };
 
@@ -48,7 +47,7 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleCheckoutShopping = (e) => {
     e.preventDefault();
-    alert('Functionality to be added for future reference');
+    alert('Coming Soon');
   };
 
   return (
