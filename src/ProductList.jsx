@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { addItem } from './CartSlice';
+
 function ProductList({ onHomeClick }) {
+    const dispatch = useDispatch();
+
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
@@ -254,6 +259,19 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(false);
     };
+
+    const handleAddToCart = (product) => {
+        // Dispatch the action to add the product to the cart (Redux action)
+        dispatch(addItem(product));
+
+        // Update the local state to reflect that the product has been added
+        setAddedToCart((prevState) => ({
+            // Spread the previous state to retain existing entries
+            ...prevState,
+            [product.name]: true,
+        }));
+    };
+
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -289,7 +307,7 @@ function ProductList({ onHomeClick }) {
                                         <img className="product-image" src={plant.image} alt={plant.name} />
                                         <div className="product-title">{plant.name}</div>
                                         <div className="product-description">{plant.description}</div>
-                                        <div className="product-cost">${plant.cost}</div>
+                                        <div className="product-cost">{plant.cost}</div>
                                         <button className="product-button" onClick={()=> handleAddToCart(plant)}>Add to Cart</button>
                                     </div>
                                 ))}
