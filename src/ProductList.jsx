@@ -226,7 +226,7 @@ function ProductList({ onHomeClick }) {
         padding: '15px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignIems: 'center',
+        alignItems: 'center',
         fontSize: '20px',
     }
     const styleObjUl = {
@@ -257,12 +257,13 @@ function ProductList({ onHomeClick }) {
 
     const handlePlantsClick = (e) => {
         e.preventDefault();
-        setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
-        setShowCart(false); // Hide the cart when navigating to About Us
+        // Set showAboutUs to true when "About Us" link is clicked
+        setShowPlants(true); 
+        // Hide the cart when navigating to About Us
+        setShowCart(false); 
     };
 
-    const handleContinueShopping = (e) => {
-        e.preventDefault();
+    const handleContinueShopping = () => {
         setShowCart(false);
     };
 
@@ -277,6 +278,8 @@ function ProductList({ onHomeClick }) {
             [product.name]: true,
         }));
     };
+
+    
 
 
     return (
@@ -359,6 +362,7 @@ function ProductList({ onHomeClick }) {
                 </div>
             ) : (
                 <CartItem onContinueShopping={handleContinueShopping} />
+
             )}
         </div>
     );
